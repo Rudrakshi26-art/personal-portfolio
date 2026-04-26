@@ -1,0 +1,215 @@
+<section class="rr-section rr-exp rr-reveal" id="rr-experience">
+  <div class="rr-section-inner">
+    <div class="rr-label">{{ section.settings.exp_label | default: "03 — Experience" }}</div>
+    <h2 class="rr-h2">{{ section.settings.exp_heading | default: "Work" }} <em>{{ section.settings.exp_heading_italic | default: "Experience" }}</em></h2>
+    <div class="rr-timeline">
+      <div class="rr-tl-line"></div>
+      {% for block in section.blocks %}
+      <div class="rr-exp-card" {{ block.shopify_attributes }}>
+        <div class="rr-exp-dot">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+        </div>
+        <div class="rr-exp-body">
+          <div class="rr-exp-top">
+            <div>
+              <h3>{{ block.settings.exp_title | default: "Job Title" }}</h3>
+              <p class="rr-exp-company">{{ block.settings.exp_company | default: "Company · Period" }}</p>
+            </div>
+            {% if block.settings.exp_is_current %}
+            <span class="rr-live-badge">
+              <span></span> Live
+            </span>
+            {% endif %}
+          </div>
+          <p class="rr-exp-desc">{{ block.settings.exp_desc }}</p>
+          <div class="rr-exp-tags">
+            {% assign exp_tags = block.settings.exp_tags | split: "," %}
+            {% for tag in exp_tags %}
+              <span>{{ tag | strip }}</span>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<style>
+/* ── TOKENS ── */
+:root{
+  --ink:#1a1410;--cream:#faf7f2;--cream2:#f3ede3;--cream3:#ece4d8;--white:#ffffff;
+  --amber:#c8842a;--amber2:#e09840;--rust:#b85c38;
+  --sh:0 8px 40px rgba(200,132,42,.14);--sh2:0 24px 60px rgba(200,132,42,.22);
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;color:var(--ink);background:var(--cream);}
+em{font-style:italic;font-family:'Playfair Display',serif;background:linear-gradient(135deg,var(--amber),var(--rust));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+
+/* ── SECTION WRAPPER ── */
+.rr-section{
+  max-width:1180px;
+  width:calc(100% - 32px);
+  margin:20px auto;
+  background:var(--white);
+  border-radius:28px;
+  padding:60px 64px;
+  box-shadow:0 4px 32px rgba(26,20,16,.07);
+  border:1px solid var(--cream3);
+  transition:box-shadow .4s var(--ease),transform .4s var(--ease);
+  overflow:hidden;
+}
+.rr-section:hover{box-shadow:var(--sh2);transform:translateY(-3px);}
+
+/* ── REVEAL ── */
+.rr-reveal{opacity:0;transform:translateY(40px);transition:opacity .7s var(--ease),transform .7s var(--ease);}
+.rr-reveal.rr-in{opacity:1;transform:translateY(0);}
+
+/* ── LABEL ── */
+.rr-label{font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--amber);margin-bottom:8px;}
+
+/* ── HEADING ── */
+.rr-h2{font-family:'Playfair Display',serif;font-size:clamp(1.7rem,3vw,2.4rem);font-weight:800;color:var(--ink);margin-bottom:40px;letter-spacing:-.5px;position:relative;display:inline-block;line-height:1.2;}
+.rr-h2::after{content:'';position:absolute;bottom:-10px;left:0;width:44px;height:3px;background:linear-gradient(90deg,var(--amber),transparent);border-radius:2px;transition:width .5s var(--ease);}
+.rr-section:hover .rr-h2::after{width:100%;}
+
+/* ── TIMELINE ── */
+.rr-timeline{position:relative;padding-left:40px;}
+.rr-tl-line{position:absolute;left:11px;top:8px;bottom:8px;width:2px;background:linear-gradient(180deg,var(--amber),rgba(200,132,42,.1));border-radius:2px;transform-origin:top;transform:scaleY(0);transition:transform .9s var(--ease) .2s;}
+.rr-in .rr-tl-line{transform:scaleY(1);}
+
+/* ── EXPERIENCE CARD ── */
+.rr-exp-card{
+  background:linear-gradient(135deg,var(--cream),var(--cream2));
+  border:1.5px solid var(--cream3);border-radius:20px;
+  padding:32px 36px;position:relative;overflow:hidden;
+  margin-bottom:24px;
+  transition:box-shadow .35s,border-color .3s,transform .35s var(--ease);
+}
+.rr-exp-card:last-child{margin-bottom:0;}
+.rr-exp-card:hover{box-shadow:var(--sh);border-color:rgba(200,132,42,.4);transform:translateX(6px);}
+
+/* ── DOT ── */
+.rr-exp-dot{
+  position:absolute;left:-55px;top:28px;
+  width:34px;height:34px;background:var(--amber);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;border:3px solid var(--white);
+  box-shadow:0 0 0 4px rgba(200,132,42,.2);
+}
+
+/* ── CARD BODY ── */
+.rr-exp-top{display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:8px;}
+.rr-exp-top h3{font-family:'Playfair Display',serif;font-size:clamp(1rem,2vw,1.25rem);font-weight:700;color:var(--ink);}
+.rr-exp-company{color:var(--amber);font-weight:600;font-size:13.5px;margin-top:4px;}
+.rr-live-badge{display:inline-flex;align-items:center;gap:7px;background:linear-gradient(135deg,#fef9ec,#fdf0d0);color:#92600a;border:1px solid #f0c870;padding:5px 14px;border-radius:50px;font-size:12px;font-weight:700;white-space:nowrap;animation:rrAmberPulse 2.5s ease-in-out infinite;}
+.rr-live-badge span{width:7px;height:7px;background:var(--amber2);border-radius:50%;animation:rrPulse 2s ease-out infinite;}
+@keyframes rrPulse{0%{box-shadow:0 0 0 0 rgba(200,132,42,.6);}60%{box-shadow:0 0 0 8px rgba(200,132,42,0);}100%{box-shadow:0 0 0 0 rgba(200,132,42,0);}}
+@keyframes rrAmberPulse{0%,100%{box-shadow:0 0 0 0 rgba(200,132,42,.2);}50%{box-shadow:0 0 0 6px rgba(200,132,42,0);}}
+.rr-exp-desc{color:#6a5a4e;line-height:1.8;font-size:14.5px;margin:16px 0;}
+.rr-exp-tags{display:flex;flex-wrap:wrap;gap:8px;}
+.rr-exp-tags span{background:rgba(200,132,42,.1);color:#7a4a10;border:1px solid rgba(200,132,42,.25);border-radius:50px;padding:4px 13px;font-size:12px;font-weight:600;}
+
+/* ═══════════════════════════
+   RESPONSIVE
+═══════════════════════════ */
+
+/* ── TABLET ≤ 1024px ── */
+@media(max-width:1024px){
+  .rr-section{padding:50px 40px;border-radius:22px;width:calc(100% - 32px);}
+  .rr-h2{margin-bottom:32px;}
+  .rr-timeline{padding-left:36px;}
+  .rr-exp-dot{left:-50px;}
+}
+
+/* ── MOBILE ≤ 768px ── */
+@media(max-width:768px){
+  .rr-section{padding:36px 24px 36px 28px;border-radius:20px;margin:14px auto;width:calc(100% - 28px);}
+  .rr-h2{font-size:1.6rem;margin-bottom:26px;}
+  .rr-timeline{padding-left:34px;}
+  .rr-exp-card{padding:22px 20px;margin-bottom:18px;}
+  .rr-exp-card:hover{transform:translateX(0) translateY(-2px);}
+  .rr-exp-dot{left:-48px;width:30px;height:30px;top:22px;}
+  .rr-exp-desc{font-size:14px;}
+}
+
+/* ── SMALL MOBILE ≤ 580px ── */
+@media(max-width:580px){
+  .rr-section{padding:28px 18px 28px 20px;border-radius:18px;margin:12px auto;width:calc(100% - 24px);}
+  .rr-timeline{padding-left:28px;}
+  .rr-tl-line{left:8px;}
+  .rr-exp-card{padding:18px 16px;border-radius:16px;margin-bottom:14px;}
+  .rr-exp-dot{left:-40px;width:26px;height:26px;top:18px;}
+  .rr-exp-dot svg{width:12px;height:12px;}
+  .rr-exp-top{flex-direction:column;gap:8px;}
+  .rr-exp-desc{font-size:13.5px;margin:12px 0;}
+  .rr-exp-tags span{font-size:11px;padding:3px 10px;}
+  .rr-label{font-size:10px;letter-spacing:2.5px;}
+}
+
+/* ── EXTRA SMALL ≤ 430px ── */
+@media(max-width:430px){
+  .rr-section{padding:22px 14px 22px 16px;border-radius:16px;margin:10px auto;width:calc(100% - 20px);}
+  .rr-timeline{padding-left:24px;}
+  .rr-tl-line{left:6px;}
+  .rr-exp-card{padding:16px 14px;border-radius:14px;}
+  .rr-exp-dot{left:-34px;width:24px;height:24px;top:16px;}
+  .rr-exp-dot svg{width:11px;height:11px;}
+  .rr-h2{font-size:1.35rem;margin-bottom:18px;}
+  .rr-exp-top h3{font-size:.95rem;}
+  .rr-exp-company{font-size:12.5px;}
+  .rr-live-badge{font-size:11px;padding:4px 10px;}
+}
+
+/* ── VERY SMALL ≤ 360px ── */
+@media(max-width:360px){
+  .rr-section{padding:18px 12px 18px 14px;border-radius:14px;margin:8px auto;width:calc(100% - 16px);}
+  .rr-timeline{padding-left:20px;}
+  .rr-tl-line{left:5px;}
+  .rr-exp-card{padding:14px 12px;border-radius:12px;}
+  .rr-exp-dot{left:-28px;width:20px;height:20px;top:14px;}
+  .rr-exp-dot svg{display:none;}
+  .rr-h2{font-size:1.2rem;margin-bottom:16px;}
+  .rr-label{letter-spacing:2px;}
+}
+</style>
+
+<script>
+(function(){
+  var obs=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('rr-in');obs.unobserve(e.target);}});
+  },{threshold:.08});
+  document.querySelectorAll('.rr-reveal').forEach(function(el){obs.observe(el);});
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Experience",
+  "tag": "div",
+  "settings": [
+    {"type":"text","id":"exp_label","label":"Section Label","default":"03 — Experience"},
+    {"type":"text","id":"exp_heading","label":"Heading","default":"Work"},
+    {"type":"text","id":"exp_heading_italic","label":"Heading (italic part)","default":"Experience"}
+  ],
+  "blocks": [
+    {
+      "type":"experience","name":"Experience",
+      "settings":[
+        {"type":"text","id":"exp_title","label":"Job Title","default":"Web Developer Intern"},
+        {"type":"text","id":"exp_company","label":"Company & Period","default":"The Works · Feb 2026 – Present"},
+        {"type":"checkbox","id":"exp_is_current","label":"Show 'Live' badge (current role)","default":true},
+        {"type":"textarea","id":"exp_desc","label":"Description","default":"Built responsive web pages and improved frontend skills using HTML, CSS, and Shopify Liquid."},
+        {"type":"text","id":"exp_tags","label":"Tags (comma-separated)","default":"HTML, CSS, Shopify Liquid, Frontend"}
+      ]
+    }
+  ],
+  "presets":[{
+    "name":"Experience",
+    "blocks":[
+      {"type":"experience","settings":{"exp_title":"Web Developer Intern","exp_company":"The Works · Feb 2026 – Present","exp_is_current":true,"exp_desc":"Built responsive web pages and improved frontend skills using HTML, CSS, and Shopify Liquid. Gained hands-on experience creating clean UI layouts and optimizing user experience.","exp_tags":"HTML, CSS, Shopify Liquid, Frontend"}}
+    ]
+  }]
+}
+{% endschema %}

@@ -1,0 +1,271 @@
+<section class="rr-section rr-projects rr-reveal" id="rr-projects">
+  <div class="rr-section-inner">
+    <div class="rr-label">{{ section.settings.projects_label | default: "04 — Projects" }}</div>
+    <h2 class="rr-h2">{{ section.settings.projects_heading | default: "Featured" }} <em>{{ section.settings.projects_heading_italic | default: "Work" }}</em></h2>
+    <div class="rr-proj-grid">
+      {% for block in section.blocks %}
+      <div class="rr-proj-card" {{ block.shopify_attributes }}>
+        <div class="rr-proj-img">
+          {% if block.settings.project_image != blank %}
+            <img src="{{ block.settings.project_image | image_url: width: 800 }}" alt="{{ block.settings.project_title }}" loading="lazy">
+          {% else %}
+            <div class="rr-proj-placeholder">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="rgba(200,132,42,0.3)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            </div>
+          {% endif %}
+          <div class="rr-proj-glass">
+            <span class="rr-proj-num">0{{ forloop.index }}</span>
+            <div class="rr-proj-actions">
+              {% if block.settings.project_github != blank %}
+              <a href="{{ block.settings.project_github }}" target="_blank" class="rr-proj-link">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+                GitHub
+              </a>
+              {% endif %}
+              {% if block.settings.project_live != blank %}
+              <a href="{{ block.settings.project_live }}" target="_blank" class="rr-proj-link rr-proj-link-live">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                Live
+              </a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+        <div class="rr-proj-info">
+          <h3>{{ block.settings.project_title | default: "Project Title" }}</h3>
+          <p>{{ block.settings.project_desc }}</p>
+          <div class="rr-proj-tags">
+            {% assign proj_tags = block.settings.project_tags | split: "," %}
+            {% for tag in proj_tags %}
+              <span>{{ tag | strip }}</span>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<style>
+/* ── TOKENS ── */
+:root{
+  --ink:#1a1410;--muted:#7c6e62;--cream:#faf7f2;--cream2:#f3ede3;--cream3:#ece4d8;--white:#ffffff;
+  --amber:#c8842a;--amber2:#e09840;--rust:#b85c38;--sage:#6b8c6e;
+  --sh2:0 24px 60px rgba(200,132,42,.22);--ease:cubic-bezier(.22,1,.36,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;color:var(--ink);background:var(--cream);}
+em{font-style:italic;font-family:'Playfair Display',serif;background:linear-gradient(135deg,var(--amber),var(--rust));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+
+/* ── SECTION WRAPPER ── */
+.rr-section{
+  max-width:1180px;
+  width:calc(100% - 32px);
+  margin:20px auto;
+  background:var(--white);
+  border-radius:28px;
+  padding:60px 64px;
+  box-shadow:0 4px 32px rgba(26,20,16,.07);
+  border:1px solid var(--cream3);
+  transition:box-shadow .4s var(--ease),transform .4s var(--ease);
+  overflow:hidden;
+}
+.rr-section:hover{box-shadow:var(--sh2);transform:translateY(-3px);}
+
+/* ── REVEAL ── */
+.rr-reveal{opacity:0;transform:translateY(40px);transition:opacity .7s var(--ease),transform .7s var(--ease);}
+.rr-reveal.rr-in{opacity:1;transform:translateY(0);}
+
+/* ── LABEL ── */
+.rr-label{font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--amber);margin-bottom:8px;}
+
+/* ── HEADING ── */
+.rr-h2{font-family:'Playfair Display',serif;font-size:clamp(1.7rem,3vw,2.4rem);font-weight:800;color:var(--ink);margin-bottom:40px;letter-spacing:-.5px;position:relative;display:inline-block;line-height:1.2;}
+.rr-h2::after{content:'';position:absolute;bottom:-10px;left:0;width:44px;height:3px;background:linear-gradient(90deg,var(--amber),transparent);border-radius:2px;transition:width .5s var(--ease);}
+.rr-section:hover .rr-h2::after{width:100%;}
+
+/* ── PROJECT GRID ── */
+.rr-proj-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+
+/* ── PROJECT CARD ── */
+.rr-proj-card{
+  background:var(--white);border-radius:20px;overflow:hidden;
+  border:1.5px solid var(--cream3);
+  box-shadow:0 2px 12px rgba(26,20,16,.06);
+  display:flex;flex-direction:column;
+  opacity:0;transform:translateY(28px);
+  transition:opacity .6s var(--ease),transform .6s var(--ease),box-shadow .4s,border-color .3s;
+}
+.rr-proj-card.rr-proj-vis{opacity:1;transform:translateY(0);}
+.rr-proj-card.rr-proj-vis:hover{transform:translateY(-12px);box-shadow:0 24px 48px rgba(200,132,42,.18);border-color:rgba(200,132,42,.4);}
+
+/* ── PROJECT IMAGE ── */
+.rr-proj-img{position:relative;height:185px;overflow:hidden;background:var(--cream);}
+.rr-proj-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:var(--cream2);}
+.rr-proj-img>img{width:100%;height:100%;object-fit:contain;padding:12px;transition:transform .5s var(--ease);}
+.rr-proj-card.rr-proj-vis:hover .rr-proj-img>img{transform:scale(1.07);}
+
+/* ── OVERLAY ── */
+.rr-proj-glass{
+  position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(26,20,16,.15) 0%,rgba(26,20,16,.82) 100%);
+  display:flex;align-items:flex-end;justify-content:space-between;
+  padding:12px 14px;gap:8px;
+  opacity:0;transition:opacity .35s ease;
+}
+.rr-proj-card:hover .rr-proj-glass{opacity:1;}
+.rr-proj-num{font-family:'Playfair Display',serif;font-size:11px;font-weight:700;color:rgba(255,255,255,.5);letter-spacing:1.5px;align-self:flex-end;}
+.rr-proj-actions{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;}
+.rr-proj-link{display:inline-flex;align-items:center;gap:6px;background:var(--amber);color:#fff;text-decoration:none;padding:6px 14px;border-radius:8px;font-size:12px;font-weight:600;transition:background .3s,transform .3s;white-space:nowrap;}
+.rr-proj-link:hover{background:var(--rust);transform:translateY(-2px);}
+.rr-proj-link-live{background:var(--sage);}
+.rr-proj-link-live:hover{background:#4a6b4c;}
+
+/* ── PROJECT INFO ── */
+.rr-proj-info{padding:18px;flex:1;display:flex;flex-direction:column;}
+.rr-proj-info h3{font-family:'Playfair Display',serif;font-size:clamp(.95rem,1.8vw,1.05rem);font-weight:700;color:var(--ink);margin-bottom:7px;}
+.rr-proj-info p{font-size:13px;color:var(--muted);line-height:1.7;flex:1;}
+.rr-proj-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:14px;}
+.rr-proj-tags span{background:rgba(200,132,42,.08);color:#7a4a10;border:1px solid rgba(200,132,42,.2);border-radius:20px;padding:3px 10px;font-size:11px;font-weight:600;}
+
+/* Mobile tap state */
+.rr-proj-card.rr-tapped .rr-proj-glass{opacity:1;}
+
+/* ═══════════════════════════
+   RESPONSIVE
+═══════════════════════════ */
+
+/* ── TABLET ≤ 1024px ── */
+@media(max-width:1024px){
+  .rr-section{padding:50px 40px;border-radius:22px;width:calc(100% - 32px);}
+  .rr-proj-grid{grid-template-columns:repeat(2,1fr);gap:16px;}
+  .rr-proj-img{height:200px;}
+  .rr-h2{margin-bottom:32px;}
+}
+
+/* ── MOBILE ≤ 768px ── */
+@media(max-width:768px){
+  .rr-section{padding:36px 24px;border-radius:20px;margin:14px auto;width:calc(100% - 28px);}
+  .rr-h2{font-size:1.6rem;margin-bottom:26px;}
+  .rr-proj-grid{grid-template-columns:repeat(2,1fr);gap:12px;}
+  .rr-proj-img{height:170px;}
+  /* Show overlay always on mobile */
+  .rr-proj-glass{opacity:1;}
+  .rr-proj-card.rr-proj-vis:hover{transform:translateY(-4px);}
+}
+
+/* ── SMALL MOBILE ≤ 580px ── */
+@media(max-width:580px){
+  .rr-section{padding:28px 20px;border-radius:18px;margin:12px auto;width:calc(100% - 24px);}
+  .rr-proj-grid{grid-template-columns:1fr;gap:12px;}
+  .rr-proj-img{height:190px;}
+  .rr-proj-card{border-radius:16px;}
+  .rr-label{font-size:10px;letter-spacing:2.5px;}
+}
+
+/* ── EXTRA SMALL ≤ 430px ── */
+@media(max-width:430px){
+  .rr-section{padding:22px 16px;border-radius:16px;margin:10px auto;width:calc(100% - 20px);}
+  .rr-proj-img{height:170px;}
+  .rr-proj-info{padding:14px;}
+  .rr-proj-info h3{font-size:.92rem;}
+  .rr-proj-tags{margin-top:10px;}
+  .rr-h2{font-size:1.35rem;margin-bottom:18px;}
+}
+
+/* ── VERY SMALL ≤ 360px ── */
+@media(max-width:360px){
+  .rr-section{padding:18px 14px;border-radius:14px;margin:8px auto;width:calc(100% - 16px);}
+  .rr-proj-grid{gap:10px;}
+  .rr-proj-img{height:155px;}
+  .rr-proj-info{padding:12px;}
+  .rr-h2{font-size:1.2rem;margin-bottom:16px;}
+  .rr-label{letter-spacing:2px;}
+  .rr-proj-link{font-size:11px;padding:5px 10px;}
+}
+</style>
+
+<script>
+(function(){
+  /* Reveal */
+  var obs=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('rr-in');obs.unobserve(e.target);}});
+  },{threshold:.08});
+  document.querySelectorAll('.rr-reveal').forEach(function(el){obs.observe(el);});
+
+  /* Stagger card entrance */
+  var cards=document.querySelectorAll('.rr-proj-card');
+  var cardObs=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        var idx=Array.from(cards).indexOf(e.target);
+        setTimeout(function(){e.target.classList.add('rr-proj-vis');},idx*90);
+        cardObs.unobserve(e.target);
+      }
+    });
+  },{threshold:.1});
+  cards.forEach(function(c){cardObs.observe(c);});
+
+  /* Mobile tap to reveal overlay */
+  var isMob=function(){return window.innerWidth<=768;};
+  cards.forEach(function(card){
+    card.addEventListener('click',function(e){
+      if(!isMob())return;
+      if(e.target.closest('.rr-proj-link'))return;
+      var open=card.classList.contains('rr-tapped');
+      cards.forEach(function(c){c.classList.remove('rr-tapped');});
+      if(!open)card.classList.add('rr-tapped');
+    });
+  });
+
+  /* 3D tilt on desktop */
+  if(!window.matchMedia('(hover: none)').matches){
+    cards.forEach(function(card){
+      card.addEventListener('mousemove',function(e){
+        if(!card.classList.contains('rr-proj-vis'))return;
+        var r=card.getBoundingClientRect();
+        var dx=(e.clientX-r.left-r.width/2)/(r.width/2);
+        var dy=(e.clientY-r.top-r.height/2)/(r.height/2);
+        card.style.transform='translateY(-12px) rotateX('+(-dy*4).toFixed(1)+'deg) rotateY('+(dx*4).toFixed(1)+'deg)';
+      });
+      card.addEventListener('mouseleave',function(){card.style.transform='';});
+    });
+  }
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Projects",
+  "tag": "div",
+  "settings": [
+    {"type":"text","id":"projects_label","label":"Section Label","default":"04 — Projects"},
+    {"type":"text","id":"projects_heading","label":"Heading","default":"Featured"},
+    {"type":"text","id":"projects_heading_italic","label":"Heading (italic part)","default":"Work"}
+  ],
+  "blocks": [
+    {
+      "type":"project","name":"Project",
+      "settings":[
+        {"type":"image_picker","id":"project_image","label":"Project Screenshot"},
+        {"type":"text","id":"project_title","label":"Project Title","default":"My Project"},
+        {"type":"textarea","id":"project_desc","label":"Short Description","default":"A short description of what this project does."},
+        {"type":"url","id":"project_github","label":"GitHub URL (optional)"},
+        {"type":"url","id":"project_live","label":"Live URL (optional)"},
+        {"type":"text","id":"project_tags","label":"Tech Tags (comma-separated)","default":"HTML, CSS, JavaScript"}
+      ]
+    }
+  ],
+  "presets":[{
+    "name":"Projects",
+    "blocks":[
+      {"type":"project","settings":{"project_title":"Smart Attendance","project_desc":"Face recognition system trained on 100 labelled images, reducing manual errors by 90%.","project_github":"https://github.com/Rudrakshi26-art/Smart-Attendence-System","project_tags":"Python, OpenCV"}},
+      {"type":"project","settings":{"project_title":"Food Delivery App","project_desc":"Responsive food delivery UI with clean menus, order flow, and cross-device compatibility.","project_github":"https://github.com/Rudrakshi26-art/Fasteat-food-delivery","project_tags":"HTML, CSS, JavaScript"}},
+      {"type":"project","settings":{"project_title":"DonutMotion UI","project_desc":"Modern team showcase with donut-style CSS visualisations, smooth animations, Shopify Liquid.","project_github":"https://github.com/Rudrakshi26-art/DonutMotion.git","project_tags":"HTML5, CSS3, Shopify Liquid"}},
+      {"type":"project","settings":{"project_title":"Library Management","project_desc":"Responsive web app with book browsing, search, and filter, showcasing strong UI/UX skills.","project_github":"https://github.com/Rudrakshi26-art/Simple-Library-Management-System","project_tags":"HTML, CSS3, JavaScript"}},
+      {"type":"project","settings":{"project_title":"Personal Portfolio Website","project_desc":"Professional portfolio built with Shopify Liquid templating and custom JS — showcases projects, skills, and experience with a clean responsive layout.","project_tags":"Shopify Liquid, HTML, CSS, JavaScript"}}
+    ]
+  }]
+}
+{% endschema %}

@@ -1,0 +1,186 @@
+<section class="rr-section rr-reveal" id="rr-about">
+  <div class="rr-section-inner">
+    <span class="rr-label">{{ section.settings.about_label | default: "01 — About" }}</span>
+    <h2 class="rr-h2">
+      {{ section.settings.about_heading | default: "About" }}
+      <em>{{ section.settings.about_heading_italic | default: "Me" }}</em>
+    </h2>
+    <div class="rr-about-grid">
+      <div class="rr-text">
+        <p>{{ section.settings.about_para_1 | default: "I'm Rudrakshi, a Shopify-focused web developer with a strong passion for creating responsive, user-friendly websites that are clean and performant." }}</p>
+        <p>{{ section.settings.about_para_2 | default: "I work with Shopify Liquid, HTML, CSS, and JavaScript — constantly improving my skills through hands-on projects and continuous learning." }}</p>
+      </div>
+      <div class="rr-cards">
+        <div class="rr-card">
+          <div class="rr-icon">{{ section.settings.about_card1_icon | default: "💻" }}</div>
+          <div class="rr-cbody">
+            <span class="rr-ctitle">{{ section.settings.about_card1_title | default: "Web Developer" }}</span>
+            <span class="rr-csub">{{ section.settings.about_card1_sub | default: "Frontend & Shopify Specialist" }}</span>
+          </div>
+        </div>
+        <div class="rr-card">
+          <div class="rr-icon">{{ section.settings.about_card2_icon | default: "✨" }}</div>
+          <div class="rr-cbody">
+            <span class="rr-ctitle">{{ section.settings.about_card2_title | default: "1+ Internship" }}</span>
+            <span class="rr-csub">{{ section.settings.about_card2_sub | default: "The Works — Feb 2026" }}</span>
+          </div>
+        </div>
+        <div class="rr-card">
+          <div class="rr-icon">{{ section.settings.about_card3_icon | default: "🎓" }}</div>
+          <div class="rr-cbody">
+            <span class="rr-ctitle">{{ section.settings.about_card3_title | default: "MCA Graduate" }}</span>
+            <span class="rr-csub">{{ section.settings.about_card3_sub | default: "Master of Computer Applications, 2026" }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+/* ── TOKENS ── */
+:root{
+  --ink:#1a1410;--muted:#7c6e62;--cream:#faf7f2;--cream2:#f3ede3;--cream3:#ece4d8;
+  --white:#ffffff;--amber:#c8842a;--amber2:#e09840;--rust:#b85c38;
+  --sh:0 8px 40px rgba(200,132,42,.14);--sh2:0 24px 60px rgba(200,132,42,.22);
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;color:var(--ink);background:var(--cream);}
+em{font-style:italic;font-family:'Playfair Display',serif;background:linear-gradient(135deg,var(--amber),var(--rust));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+
+/* ── SECTION WRAPPER ── */
+.rr-section{
+  display:block;
+  max-width:1180px;
+  /* Side gutters so it never touches screen edges */
+  width:calc(100% - 32px);
+  margin:20px auto;
+  background:var(--white);
+  border:1px solid var(--cream3);
+  border-radius:28px;
+  padding:60px 64px;
+  box-shadow:0 4px 28px rgba(26,20,16,.07);
+  transition:box-shadow .4s var(--ease),transform .4s var(--ease);
+  overflow:hidden;
+}
+.rr-section:hover{box-shadow:var(--sh2);transform:translateY(-2px);}
+
+/* ── REVEAL ── */
+.rr-reveal{opacity:0;transform:translateY(28px);transition:opacity .7s var(--ease),transform .7s var(--ease);}
+.rr-reveal.rr-in{opacity:1;transform:translateY(0);}
+
+/* ── LABEL ── */
+.rr-label{display:block;font-size:10.5px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--amber);margin-bottom:10px;}
+
+/* ── HEADING ── */
+.rr-h2{display:inline-block;font-family:'Playfair Display',Georgia,serif;font-size:clamp(1.6rem,3vw,2.25rem);font-weight:800;color:var(--ink);line-height:1.2;letter-spacing:-.4px;margin-bottom:36px;position:relative;}
+.rr-h2::after{content:'';position:absolute;bottom:-10px;left:0;width:42px;height:3px;background:linear-gradient(90deg,var(--amber),transparent);border-radius:2px;transition:width .55s var(--ease);}
+.rr-section:hover .rr-h2::after{width:100%;}
+
+/* ── GRID ── */
+.rr-about-grid{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:start;}
+
+/* ── TEXT ── */
+.rr-text p{color:#5a4e44;font-size:clamp(14px,1.6vw,15.5px);line-height:1.9;margin-bottom:18px;}
+.rr-text p:last-child{margin-bottom:0;}
+
+/* ── CARDS ── */
+.rr-cards{display:flex;flex-direction:column;gap:12px;}
+.rr-card{display:flex;align-items:center;gap:14px;background:linear-gradient(135deg,var(--cream),var(--cream2));border:1px solid var(--cream3);border-radius:13px;padding:15px 18px;min-height:72px;transition:transform .3s var(--ease),box-shadow .3s,border-color .25s;}
+.rr-card:hover{transform:translateX(5px);box-shadow:0 8px 32px rgba(200,132,42,.13);border-color:rgba(200,132,42,.28);}
+.rr-icon{flex-shrink:0;width:42px;height:42px;border-radius:10px;background:var(--white);border:1px solid var(--cream3);display:flex;align-items:center;justify-content:center;font-size:18px;line-height:1;}
+.rr-cbody{min-width:0;flex:1;}
+.rr-ctitle{display:block;font-weight:700;font-size:13.5px;color:var(--ink);overflow:hidden;text-overflow:ellipsis;}
+.rr-csub{display:block;font-size:12px;color:var(--muted);margin-top:3px;line-height:1.4;}
+
+/* ═══════════════════════════
+   RESPONSIVE
+═══════════════════════════ */
+
+/* ── TABLET ≤ 1024px ── */
+@media(max-width:1024px){
+  .rr-section{padding:50px 40px;border-radius:22px;width:calc(100% - 32px);}
+  .rr-about-grid{grid-template-columns:1fr;gap:28px;}
+  .rr-h2{font-size:1.8rem;margin-bottom:26px;}
+  /* Cards: 2-per-row on tablet */
+  .rr-cards{flex-direction:row;flex-wrap:wrap;gap:10px;}
+  .rr-card{flex:1 1 calc(50% - 5px);min-width:180px;}
+  .rr-card:hover{transform:translateY(-3px) translateX(0);}
+}
+
+/* ── MOBILE ≤ 768px ── */
+@media(max-width:768px){
+  .rr-section{padding:36px 24px;border-radius:20px;margin:14px auto;width:calc(100% - 28px);}
+  .rr-about-grid{gap:20px;}
+  .rr-h2{font-size:1.6rem;margin-bottom:22px;}
+}
+
+/* ── SMALL MOBILE ≤ 580px ── */
+@media(max-width:580px){
+  .rr-section{padding:28px 20px;border-radius:18px;margin:12px auto;width:calc(100% - 24px);}
+  /* Cards: back to vertical on small mobile */
+  .rr-cards{flex-direction:column;gap:10px;}
+  .rr-card{flex:unset;width:100%;min-height:64px;padding:13px 15px;border-radius:11px;}
+  .rr-card:hover{transform:none;box-shadow:none;border-color:var(--cream3);}
+  .rr-icon{width:38px;height:38px;font-size:16px;border-radius:9px;}
+  .rr-ctitle{font-size:13px;}
+  .rr-csub{font-size:11.5px;}
+  .rr-label{font-size:10px;letter-spacing:2.5px;}
+}
+
+/* ── EXTRA SMALL ≤ 430px ── */
+@media(max-width:430px){
+  .rr-section{padding:22px 16px;border-radius:16px;margin:10px auto;width:calc(100% - 20px);}
+  .rr-h2{font-size:1.35rem;margin-bottom:18px;}
+  .rr-text p{font-size:14px;margin-bottom:12px;}
+  .rr-card{padding:12px 13px;min-height:60px;}
+  .rr-icon{width:36px;height:36px;font-size:15px;}
+  .rr-ctitle{font-size:12.5px;}
+  .rr-csub{font-size:11px;}
+}
+
+/* ── VERY SMALL ≤ 360px ── */
+@media(max-width:360px){
+  .rr-section{padding:18px 14px;border-radius:14px;margin:8px auto;width:calc(100% - 16px);}
+  .rr-h2{font-size:1.22rem;margin-bottom:16px;}
+  .rr-card{gap:10px;padding:11px 12px;min-height:56px;}
+  .rr-icon{width:32px;height:32px;font-size:14px;border-radius:7px;}
+  .rr-ctitle{font-size:12px;}
+  .rr-csub{font-size:10.5px;margin-top:2px;}
+  .rr-label{letter-spacing:2px;}
+}
+</style>
+
+<script>
+(function(){
+  var obs=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('rr-in');obs.unobserve(e.target);}});
+  },{threshold:0.08});
+  document.querySelectorAll('.rr-reveal').forEach(function(el){obs.observe(el);});
+})();
+</script>
+
+{% schema %}
+{
+  "name": "About",
+  "tag": "div",
+  "settings": [
+    {"type":"text","id":"about_label","label":"Section Label","default":"01 — About"},
+    {"type":"text","id":"about_heading","label":"Heading","default":"About"},
+    {"type":"text","id":"about_heading_italic","label":"Heading (italic part)","default":"Me"},
+    {"type":"textarea","id":"about_para_1","label":"Paragraph 1","default":"I'm Rudrakshi, a Shopify-focused web developer with a strong passion for creating responsive, user-friendly websites that are clean and performant."},
+    {"type":"textarea","id":"about_para_2","label":"Paragraph 2","default":"I work with Shopify Liquid, HTML, CSS, and JavaScript — constantly improving my skills through hands-on projects and continuous learning."},
+    {"type":"text","id":"about_card1_icon","label":"Card 1 Emoji","default":"💻"},
+    {"type":"text","id":"about_card1_title","label":"Card 1 Title","default":"Web Developer"},
+    {"type":"text","id":"about_card1_sub","label":"Card 1 Sub-text","default":"Frontend & Shopify Specialist"},
+    {"type":"text","id":"about_card2_icon","label":"Card 2 Emoji","default":"✨"},
+    {"type":"text","id":"about_card2_title","label":"Card 2 Title","default":"1+ Internship"},
+    {"type":"text","id":"about_card2_sub","label":"Card 2 Sub-text","default":"The Works — Feb 2026"},
+    {"type":"text","id":"about_card3_icon","label":"Card 3 Emoji","default":"🎓"},
+    {"type":"text","id":"about_card3_title","label":"Card 3 Title","default":"MCA Graduate"},
+    {"type":"text","id":"about_card3_sub","label":"Card 3 Sub-text","default":"Master of Computer Applications, 2026"}
+  ],
+  "presets":[{"name":"About"}]
+}
+{% endschema %}
