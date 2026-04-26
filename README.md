@@ -1,10 +1,11 @@
-personal portfolio
+**personal portfolio**
+
 ▸ Built a professional portfolio using Shopify Liquid
 templating and custom JS.
 ▸ Showcases projects, skills, and experience with a clean
 responsive layout.
 
-🚀 Overview
+**🚀 Overview**
 
 This project is a Shopify theme-based portfolio created using Liquid, HTML, CSS, and JavaScript.
 It is designed to highlight:
@@ -15,13 +16,13 @@ Experience
 Skills
 Contact details
 
-🛠️ Tech Stack
+**🛠️ Tech Stack**
 Shopify Liquid (Templating)
 HTML5
 CSS3
 JavaScript
 
-📂 Project Structure
+**📂 Project Structure**
 /layout
 /templates
 /sections
@@ -34,7 +35,7 @@ portfolio-experience.liquid – Experience details
 portfolio-project.liquid – Projects showcase
 portfolio-skill.liquid – Skills section
 
-💻 Features
+**💻 Features**
 Modular Liquid sections
 Clean and minimal UI
 Easy to customize
@@ -51,5 +52,3 @@ Customize content inside Liquid files
 Publish theme
 
 This project focuses on Shopify theme development and cannot be deployed independently like a static website
-
-GitHub: https://github.com/your-username
