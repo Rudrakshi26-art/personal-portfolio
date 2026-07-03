@@ -66,7 +66,7 @@ Fully responsive design
 Structured portfolio layout
 
 🔗 Live Preview
-[ https://your-store-name.myshopify.com](https://d6yy7e-rz.myshopify.com/)
+[ https://your-store-name.myshopify.com][(https://d6yy7e-rz.myshopify.com/)]
 
 ⚙️ Setup Instructions
 
